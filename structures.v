@@ -442,6 +442,12 @@ Elpi Accumulate File "HB/factory.elpi".
 Elpi Accumulate Db hb.db.
 Elpi Accumulate lp:{{
 
+main [A] :- A = upoly-indt-decl Decl (upoly-decl Vs LV Cs LC), !,
+  universe-polymorphic (not-cumul Vs LV Cs LC) =>
+    with-attributes (with-logging (factory.declare-mixin (indt-decl Decl))).
+main [A] :- A = upoly-indt-decl Decl (upoly-decl-cumul Vs LV Cs LC), !,
+  universe-polymorphic (cumul Vs LV Cs LC) =>
+    with-attributes (with-logging (factory.declare-mixin (indt-decl Decl))).
 main [A] :- A = indt-decl _, !,
   with-attributes (with-logging (factory.declare-mixin A)).
 
